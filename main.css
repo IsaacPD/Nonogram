@@ -1,41 +1,49 @@
 body {
-    background-color: green;
-}
-.input {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+    background-color: #305426;
+    font-family: 'Geo', sans-serif;
+    -webkit-font-smoothing: none;
+    font-weight: bold;
 }
 
-.input + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: green;
-    display: inline-block;
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
 }
 
-.input:focus + label,
-.input + label:hover {
-    background-color:greenyellow;
+.btn {
+  border: none;
+  color: white;
+  background-color: #305426;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 50px;
+  font-weight: bold; 
 }
 
-.input + label {
-	cursor: pointer; /* "hand" cursor */
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }
 
-#quit{
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: green;
-    display: inline-block;
-    cursor: pointer;
+.dim {
+  color: white;
+  font-size: 30px;
 }
 
-#quit:hover {
-    background-color:greenyellow;
+#dim-label {
+  color: white;
+  font-size: 40px;
+}
+
+#info {
+  width: 70%;
+}
+
+.dim-btn {
+  font-size: 40px;
+  padding: 0%;
 }

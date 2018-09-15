@@ -2,9 +2,11 @@
 <html>
    <head>
       <meta charset = "UTF-8">
+      <link rel = "shortcut icon" href = "./img/nono_logo_01_4tV_icon.ico" />
       <title>Nonogram</title>
       <link rel = "stylesheet" 
          href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+      <link href="https://fonts.googleapis.com/css?family=Geo" rel="stylesheet">
       <link rel="stylesheet" href="../main.css" />
    </head>
    
@@ -14,14 +16,19 @@
             <div class="col-sm"></div>
             <div class="col-sm">
                 <div class = "row">
-                    <img src="../img/logo.jpg" >                    
+                    <img src="../img/logo.jpg" />                    
                 </div>
                 <div class = "row">
-                    <input type="file" name = "file" id = "file" class = "input" />
-                    <label for="file">Start</label>
+                        <a href = "./dimension.html" class = "btn">START</a>
                 </div>
                 <div class = "row">
-                    <label id = "quit" onclick = "quit();">Quit</label>
+                    <div class="upload-btn-wrapper">
+                            <button class="btn">CREATE</button>
+                            <input type="file" name="myfile" />
+                            </div>
+                </div>
+                <div class = "row">
+                    <button class = "btn" id = "quit" onclick = "quit();">QUIT</label>
                     <script>
                         function quit() {                            
                             const remote = require('electron').remote
