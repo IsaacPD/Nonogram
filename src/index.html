@@ -17,11 +17,18 @@
                     <img src="../img/logo.jpg" >                    
                 </div>
                 <div class = "row">
-                    <input type="file" id = "source">
-                    <button type="button" class="btn btn-primary btn-sm" id = "start">Start</button>
+                    <input type="file" name = "file" id = "file" class = "input" />
+                    <label for="file">Start</label>
                 </div>
                 <div class = "row">
-                    <button type="button" class="btn btn-primary btn-sm" id = "quit">Quit</button>
+                    <label id = "quit" onclick = "quit();">Quit</label>
+                    <script>
+                        function quit() {                            
+                            const remote = require('electron').remote
+                            let w = remote.getCurrentWindow()
+                            w.close()
+                        }
+                    </script>
                 </div>
             </div>
             <div class="col-sm"></div>

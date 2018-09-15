@@ -1,0 +1,41 @@
+body {
+    background-color: green;
+}
+.input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.input + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: green;
+    display: inline-block;
+}
+
+.input:focus + label,
+.input + label:hover {
+    background-color:greenyellow;
+}
+
+.input + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+#quit{
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: green;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#quit:hover {
+    background-color:greenyellow;
+}
