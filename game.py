@@ -1,4 +1,7 @@
 from PIL import Image
+from threading import Thread
+from threading import Event
+import time
 
 BLACK = 0
 WHITE = 1
@@ -29,8 +32,21 @@ class BitVector2D:
 			return False
 		return self.vector == other.vector and self.c == other.c and self.r == other.r
 
+class ClockTimer(Thread):
+	def __init__(self, event):
+		Thread.__init__(self)
+		self.stopped = event
+		self.timer = 0
+	
+	def run(self):
+		while not self.stopped.wait(1.0):
+			self.timer += 1
+	
 class Game:
 	def __init__(self, image):
+		self.stop = Event()
+		self.clock = ClockTimer(self.stop)
+
 		self.image = image
 		self.rows, self.cols = image.size
 		self.board = BitVector2D(self.cols, self.rows)
@@ -52,6 +68,10 @@ class Game:
 			if col > self.cols:
 				row += 1
 				col = 0
+	
+	def make_guess(self, row, col, val):
+		actual = self.board.get(row, col)
+		self.pboard.set(row, col, val)
 
 	def win(self):
 		return self.board == self.pboard
