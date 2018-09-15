@@ -2,6 +2,7 @@ from PIL import Image
 from threading import Thread
 from threading import Event
 import time
+import pixelate
 
 BLACK = 0
 WHITE = 1
@@ -57,7 +58,7 @@ class Game:
 		self.stop = Event()
 		self.clock = ClockTimer(self.stop)
 
-		self.won = True
+		self.won = False
 		self.image = image
 		self.rows, self.cols = image.size
 
@@ -122,9 +123,9 @@ class Game:
 		return str(self.pboard)
 
 if __name__ == '__main__':
-	img = Image.open('test.png', 'r')
+	img = pixelate.pixelize('dribbble-1.png')
 	game = Game(img)
-	print(game.chints)
+	print(game.board)
 	while not game.won:
 		print(game)
 		guess = [int(x) for x in input('Guess: ').split(' ')]

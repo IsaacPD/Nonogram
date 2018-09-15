@@ -4,19 +4,15 @@ import cv2
 import os
 #open a user selected image
 
-def blackwhite():
-	filename = askopenfilename()
+def blackwhite(filename):
 	im_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 	(thresh, im_bw) = cv2.threshold(im_gray, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 	cv2.imwrite('bw_image.png', im_bw)
 	return os.path.abspath("bw_image.png")
-	#im_bw.show()
 def cropping(source):
-	
 	height = source.size[1]
 	width = source.size[0]
 	rgb = source.convert('RGB')
-	rgb.show()
 	pixelList = []
 	for i in range (height):
 		for j in range (width):
@@ -57,13 +53,9 @@ def cropping(source):
 		else:
 			continue
 		break
-
-	result = source.crop((pixelList[1], pixelList[0], pixelList[2], pixelList[3]))
-	return result
-
-
+	return source.crop((pixelList[1], pixelList[0], pixelList[2], pixelList[3]))
 	
-def pixelate(input_file_path, output_file_path, width, height):
+def pixelate(input_file_path, width, height):
     image = Image.open(input_file_path)
     
     image = image.resize(
@@ -75,6 +67,11 @@ def pixelate(input_file_path, output_file_path, width, height):
         (width, height),
         Image.NEAREST
     )
-    image.save(output_file_path)
+    image = image.convert('RGB')
+    return image
 
-pixelate(blackwhite(), "./pixelated.png", 30, 30)
+def pixelize(filename, width = 30, height = 30):
+	return pixelate(blackwhite(filename), width, height)
+
+if __name__ == '__main__':
+	pixelize(askopenfilename())
