@@ -21,6 +21,14 @@ body {
   font-weight: bold; 
 }
 
+.btn:hover {
+  color: blue;
+}
+
+#input:hover {
+  color: blue;
+}
+
 .upload-btn-wrapper input[type=file] {
   font-size: 100px;
   position: absolute;
@@ -46,4 +54,9 @@ body {
 .dim-btn {
   font-size: 40px;
   padding: 0%;
+}
+
+.content {
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
