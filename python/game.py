@@ -3,6 +3,7 @@ from threading import Thread
 from threading import Event
 import time
 import pixelate
+import sys
 
 BLACK = 0
 WHITE = 1
@@ -123,10 +124,6 @@ class Game:
 		return str(self.pboard)
 
 if __name__ == '__main__':
-	img = pixelate.pixelize('dribbble-1.png')
+	img = pixelate.pixelize(sys.argv[1])
 	game = Game(img)
-	print(game.board)
-	while not game.won:
-		print(game)
-		guess = [int(x) for x in input('Guess: ').split(' ')]
-		game.make_guess(guess[0], guess[1], guess[2])
+	print(game.chints, game.rhints, game.rows, game.cols, game.board.vector)
