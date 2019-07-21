@@ -1,0 +1,9 @@
+body {
+	background-color: #305426;
+}
+
+.square{
+		background-color: white;
+		border: black;
+		border-radius: 10
+}

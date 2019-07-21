@@ -5,6 +5,10 @@ body {
     font-weight: bold;
 }
 
+button {
+  -webkit-app-region: no-drag;
+}
+
 .upload-btn-wrapper {
   position: relative;
   overflow: hidden;

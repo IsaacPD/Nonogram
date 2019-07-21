@@ -2,9 +2,10 @@
   "name": "nonogram",
   "version": "1.0.0",
   "description": "SBUHacks 2018 Project",
-  "main": "main.js",
+  "main": "js/main.js",
   "dependencies": {
-    "jquery": "^3.3.1"
+    "jquery": ">=3.4.0",
+    "python-shell": "^1.0.4"
   },
   "devDependencies": {
     "electron": "^2.0.9",

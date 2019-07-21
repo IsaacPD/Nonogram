@@ -74,4 +74,4 @@ def pixelize(filename, width = 30, height = 30):
 	return pixelate(blackwhite(filename), width, height)
 
 if __name__ == '__main__':
-	pixelize(askopenfilename())
+	pixelize(askopenfilename()).save("pixelated.png")

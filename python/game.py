@@ -4,45 +4,10 @@ from threading import Event
 import time
 import pixelate
 import sys
+import json
 
 BLACK = 0
 WHITE = 1
-
-#2D BitVector For representing a 2D Boolean Array
-class BitVector2D:
-	def __init__(self, rows, cols):
-		self.r = rows
-		self.c = cols
-		self.vector = (1 << (rows*cols)) - 1
-	
-	def get(self, row, col):
-		pos = row * self.c + col
-		return (self.vector >> pos) & 1
-
-	def set(self, row, col, val):
-		pos = row * self.c + col
-		mask = 1 << pos
-
-		if val == WHITE:
-			self.vector |= mask
-		elif val == BLACK:
-			mask = ~mask
-			self.vector &= mask
-	
-	def __str__(self):
-		result = ''
-		copy = self.vector
-		for _ in range(self.r):
-			for _ in range(self.c):
-				result += str(copy & 1) + ' '
-				copy = copy >> 1
-			result += '\n'
-		return result
-
-	def __eq__(self, other):
-		if not isinstance(other, BitVector2D):
-			return False
-		return self.vector == other.vector and self.c == other.c and self.r == other.r
 
 class ClockTimer(Thread):
 	def __init__(self, event):
@@ -66,8 +31,8 @@ class Game:
 		self.rhints = [[] for _ in range(self.rows)]
 		self.chints = [[] for _ in range(self.cols)]
 
-		self.board = BitVector2D(self.cols, self.rows)
-		self.pboard = BitVector2D(self.cols, self.rows)
+		self.board = [[0] * self.cols for _ in range(self.rows)]
+		self.pboard = [[0] * self.cols for _ in range(self.rows)]
 		self.guesses = dict()
 
 		self.init()
@@ -84,9 +49,9 @@ class Game:
 			if r + g + b == BLACK:
 				rhi += 1
 				chi[col] += 1
-				self.board.set(row, col, BLACK)
+				self.board[row][col] = BLACK
 			else:
-				self.board.set(row, col, WHITE)
+				self.board[row][col] = WHITE
 				if chi[col] != 0:
 					self.chints[col].insert(0, chi[col])
 					chi[col] = 0
@@ -109,7 +74,7 @@ class Game:
 		actual = self.board.get(row, col)
 
 		self.guesses[(row, col)] = (actual == val)
-		self.pboard.set(row, col, val)
+		self.pboard[row][col] = val
 
 		if self.win():
 			self.stop.set()
@@ -124,6 +89,10 @@ class Game:
 		return str(self.pboard)
 
 if __name__ == '__main__':
-	img = pixelate.pixelize(sys.argv[1])
+	img = pixelate.pixelize(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
 	game = Game(img)
-	print(game.chints, game.rhints, game.rows, game.cols, game.board.vector)
+	print(json.dumps(game.chints), end="|")
+	print(json.dumps(game.rhints), end="|")
+	print(game.rows, end="|")
+	print(game.cols, end="|")
+	print(json.dumps(game.board), end="")
